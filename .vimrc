@@ -65,6 +65,7 @@ set wildignore+=*.pdf,*.aux,*.blg,*.log,*.bbl,*.synctex,*.lof,*.lot,*.toc
 set shell=/bin/bash
 " don't set folds when opening files
 set nofoldenable
+set nowrap
 
 " some diff options
 " set diffopt=filler,internal,algorithm:histogram,indent-heuristic
@@ -79,9 +80,15 @@ filetype plugin indent on
 syntax on
 
 " nice colorscheme
-let base16colorspace=256
+" let base16colorspace=256
 " I like base16-ashes, but don't use vim for OSX
 " colorscheme base16-ashes
+
+" fugitive colors
+hi! DiffAdd      guibg=#003300
+hi! DiffChange   guibg=#003300
+hi! DiffDelete   guifg=#330000 guibg=#330000
+hi! DiffText     guibg=#990000   
 
 " visual navigation of wrapped lines
 noremap j gj
@@ -91,7 +98,16 @@ noremap gk k
 noremap $ g$
 noremap ^ g^
 noremap g^ ^
-noremap $ g$
+noremap g$ $
+
+" splits
+" nnoremap <C-J> <C-W><C-J>
+" nnoremap <C-K> <C-W><C-K>
+" nnoremap <C-L> <C-W><C-L>
+" nnoremap <C-H> <C-W><C-H>
+
+set splitbelow
+set splitright
 
 " flying buffer changes
 "nnoremap <leader>b :ls<CR>:b<space>
@@ -134,8 +150,8 @@ let g:netrw_browse_split = 4
 
 " give Makefiles tabs instead of spaces
 autocmd FileType make setlocal noexpandtab
-" break text files at 79
-autocmd FileType text,python setlocal textwidth=79
+" break text files at 88
+autocmd FileType text,python setlocal textwidth=88
 " highlight texwidth column
 set colorcolumn=+1
 " turn on spelling
@@ -179,6 +195,8 @@ let g:ale_lint_on_text_changed = 'never'
 let g:ale_set_highlights = 0
 let g:ale_completion_enbaled = 1
 
+let g:ale_fixers = {'python': ['black']}
+nnoremap <leader>l :ALEFix<cr>
 
 
 """""""""""""""""""""""""""
